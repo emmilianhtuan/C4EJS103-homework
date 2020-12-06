@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form1" onsubmit="getFormvalue(event)">
+        Cityname: <input id="cName" type="text"><br>
+        <input type="submit" value="Submit">
+        <p id="information1"></p>
+        <p id="information2"></p>
+        <p id="information3"></p>
+    </form>
+
+    <script>
+        const getFormvalue = (event) => {
+            event.preventDefault();
+            let cityName = document.getElementById("cName").value;
+            console.log(cityName)
+            async function getData() {
+            let respond = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=6fc639b3255d79aa3496c4d06e978e58")
+            respond = await respond.json()
+            document.getElementById("information1").innerHTML = "city : " + cityName
+            document.getElementById("information2").innerHTML = "temperature is " + respond.main.temp
+            document.getElementById("information3").innerHTML = "pressure : " + respond.main.pressure
+        }
+            getData()
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+<!-- // <form id="form1" onsubmit="getFormvalue(event)">
+//     First name: <input id="fName" type="text" name="fname"><br>
+//     Last name: <input id="lName" type="text" name="lname" value="Beckham"><br>
+//     <input type="submit" value="Submit">
+// </form> -->
+
+<!-- // <script> -->
+<!-- //     const getFormvalue = (event) => {
+//         event.preventDefault();
+//         let firstName = document.getElementById("fName").value;
+//         let lastName = document.getElementById("lName").value;
+//         console.log(firstName + " " + lastName)
+//     }; -->
